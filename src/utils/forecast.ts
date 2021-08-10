@@ -35,11 +35,9 @@ export const forecast = async (lat: number, lng: number) => {
     } = response;
 
     if (!error && data) {
-      const {
-        current: { temperature },
-      } = data;
+      const { current } = data;
 
-      return { temperature };
+      return { current };
     } else {
       throw new Error(`Location not found`);
     }

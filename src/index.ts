@@ -1,6 +1,8 @@
 import express from "express";
 import path from "path";
 import hbs from "hbs";
+import { geoCode } from "./utils/geocode";
+import { forecast } from "./utils/forecast";
 
 const publicDirectory = path.join(__dirname, "../public");
 const viewsPath = path.join(__dirname, "../templates/views");
@@ -35,19 +37,34 @@ app.get("/help", (req, res) => {
   });
 });
 
-app.get("/weather", (req, res) => {
+app.get("/weather", async (req, res) => {
   const { address } = req.query;
 
-  if (!address) {
+  if (!address || typeof address !== "string") {
     res.status(400);
     return res.send({
       error: "Address is required in the query",
     });
   }
 
+  const geoData = await geoCode(address);
+  if (geoData) {
+    const {
+      latLng: [lat, lng],
+      placeName,
+    } = geoData;
+    const weatherData = await forecast(lat, lng);
+    if (weatherData) {
+      const { current } = weatherData;
+      return res.send({
+        current,
+        placeName,
+      });
+    }
+  }
+
   res.send({
-    forecast: "Rain",
-    location: address,
+    error: "Could not get weather data",
   });
 });
 

@@ -8,6 +8,17 @@
   </head>
   <body>
     {{>header}}
+    <p>Lets fetch some weather</p>
+
+  <form>
+    <input placeholder="Search for a location"/>
+    <button type="submit">Search</button>
+  </form>
+
+  <p id="message"></p>
+  <p id="error"></p>
+
     {{>footer}}
+    <script src="/script/app.js"></script>
   </body>
 </html>
