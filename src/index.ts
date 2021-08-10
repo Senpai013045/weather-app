@@ -9,6 +9,7 @@ const viewsPath = path.join(__dirname, "../templates/views");
 const partialsPath = path.join(__dirname, "../templates/partials");
 
 const app = express();
+const PORT = process.env.PORT || 8080;
 
 app.use(express.static(publicDirectory));
 app.set("view engine", "hbs");
@@ -83,6 +84,6 @@ app.get("/help/*", (req, res) => {
     });
   });
 
-app.listen(8080, () => {
-  console.log("Listening on port 8080");
+app.listen(PORT, () => {
+  console.log("Listening on port " + PORT);
 });
