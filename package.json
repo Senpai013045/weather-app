@@ -4,6 +4,7 @@
     "@types/hbs": "^4.0.1",
     "@types/node": "^16.4.13",
     "@types/yargs": "^17.0.2",
+    "axios": "^0.21.1",
     "concurrently": "^6.2.1",
     "express": "^4.17.1",
     "hbs": "^4.1.2",
@@ -15,7 +16,7 @@
   },
   "scripts": {
     "dev:ts": "tsc -w",
-    "dev:js": "nodemon dist",
+    "dev:js": "nodemon dist -e js,hbs",
     "dev": "concurrently npm:dev:*",
     "build": "rimraf dist && tsc",
     "exec": "node dist"
