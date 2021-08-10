@@ -19,6 +19,6 @@
     "dev:js": "nodemon dist -e js,hbs",
     "dev": "concurrently npm:dev:*",
     "build": "rimraf dist && tsc",
-    "exec": "node dist"
+    "start": "node dist"
   }
 }
